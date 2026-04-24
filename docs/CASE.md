@@ -1,0 +1,11 @@
+*** MY CASE STUDY ***
+
+Se necesita desarrollar un sistema informático tipo mesa de ayuda (help desk) que permita gestionar de manera eficiente las solicitudes de soporte generadas por los usuarios dentro de una organización. Actualmente, el manejo de estos requerimientos se realiza de forma desordenada, mediante mensajes informales o canales no centralizados, lo que provoca pérdida de información, demoras en la atención y dificultad para hacer seguimiento al estado de cada solicitud.
+
+El sistema propuesto permitirá que los usuarios se registren e inicien sesión de manera segura mediante autenticación basada en tokens (JWT), garantizando el acceso controlado a la información. Una vez autenticados, los usuarios podrán crear tickets de soporte describiendo su problema, seleccionando una categoría (por ejemplo: soporte técnico, pagos o matrícula) y asignando un nivel de prioridad. Esto facilitará la organización y clasificación de las solicitudes desde el momento de su creación.
+
+Por otro lado, el sistema contemplará diferentes roles de usuario, como solicitantes, agentes de soporte y administradores. Los agentes podrán visualizar los tickets asignados, dar respuesta a través de comentarios y actualizar su estado (abierto, en proceso o cerrado). Los administradores tendrán la capacidad de supervisar todos los tickets, asignarlos a agentes específicos y garantizar que las solicitudes sean atendidas de manera oportuna.
+
+Adicionalmente, cada ticket contará con un historial de acciones que permitirá registrar cambios relevantes, como actualizaciones de estado o asignaciones, proporcionando trazabilidad y control sobre el ciclo de vida de cada solicitud. También se incluirá la funcionalidad de comentarios, permitiendo la comunicación directa entre usuarios y agentes dentro de cada ticket, evitando el uso de canales externos.
+
+Finalmente, el sistema permitirá consultar y filtrar tickets según diferentes criterios como estado, prioridad o usuario, facilitando la gestión y el análisis de la información. Con esta solución se busca mejorar la organización, el seguimiento y la eficiencia en la atención de solicitudes, proporcionando una herramienta clara, estructurada y segura que optimice los procesos de soporte dentro de la organización.
