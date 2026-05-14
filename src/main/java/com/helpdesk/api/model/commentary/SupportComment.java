@@ -19,9 +19,14 @@ public class SupportComment extends Comment {
     protected SupportComment() {
     }
 
-    public SupportComment(Profile author, String description, boolean isVisibleToUser) {
+    public SupportComment(Profile author, String description) {
         super(author, description);
         this.isVisibleToUser = true;
+    }
+
+    public SupportComment(Profile author, String description, boolean isVisibleToUser) {
+        super(author, description);
+        this.isVisibleToUser = isVisibleToUser;
     }
 }
 
