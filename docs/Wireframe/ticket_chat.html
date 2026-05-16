@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticket</title>
+</head>
+<body>
+    <div class="conteiner">
+        <h1>Crear Ticket</h1>
+
+        <label>Titulo
+            <input type="text"
+            placeholder="Asunto general">
+        </label>
+        
+        <label>Descripcion
+            <textarea name="" id="" cols="30" rows="10"
+            placeholder="Descripción detallada ..."></textarea>
+        </label>
+        
+        <label>Categoria
+            <select>
+                <option value="uno">Academica</option>
+                <option value="dos">Rendimiento</option>
+                <option value="tres">Comportamiento</option>
+            </select>
+        </label>
+        
+        <label>Prioridad
+            <select>
+                <option value="uno">Alta</option>
+                <option value="dos">Media</option>
+                <option value="tres">Baja</option>
+            </select>
+        </label>
+
+        <button>Enviar</button>
+    </div>
+</body>
+</html>
+
+<!-- estilos -->
+
+<style>
+    
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+    }
+
+    .conteiner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 730px;
+        width: 480px;
+        border: 1px solid black;
+        border-radius: 2px;
+        margin: 6px;
+        scale: 200%;
+        background-color: #BED5EB;
+    }
+
+    label {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        width: 300px;
+        color: #222;
+    }
+
+    input, textarea, select, option {
+        background-color: #BED5EB;
+        border: none;
+        border-bottom: 2px solid black;
+        border-radius: 3px;
+        outline: none;
+        margin: 2px;
+        padding: 2px;
+        margin-top: 12px;
+    }
+
+    h1 {
+        margin-bottom: 60px;
+        font-size: 50px;
+    }
+
+    button {
+        width: 200px;
+        height: 40px;
+        font-size: 20px;
+        background-color: #3E6180;
+        color: white;
+        border: none;
+        border-radius: 3px;
+        margin-top: 60px;
+    }
+
+</style>
