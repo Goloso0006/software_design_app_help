@@ -1,4 +1,4 @@
-package com.helpdesk.api.repository;
+package com.helpdesk.api.repository.ticket;
 
 import com.helpdesk.api.model.ticket.Ticket;
 import com.helpdesk.api.model.enums.ticket.TicketCategories;
@@ -8,7 +8,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * Repository para la entidad Ticket

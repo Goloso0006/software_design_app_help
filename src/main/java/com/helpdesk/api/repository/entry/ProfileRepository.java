@@ -1,4 +1,4 @@
-package com.helpdesk.api.repository;
+package com.helpdesk.api.repository.entry;
 
 import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.model.enums.entry.ProfileRoles;
