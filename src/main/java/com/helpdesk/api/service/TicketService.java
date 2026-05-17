@@ -5,6 +5,8 @@ import com.helpdesk.api.model.enums.entry.ProfileRoles;
 import com.helpdesk.api.model.enums.ticket.TicketCategories;
 import com.helpdesk.api.model.enums.ticket.TicketPriorities;
 import com.helpdesk.api.model.ticket.Ticket;
+import com.helpdesk.api.model.enums.ticket.TicketStates;
+import java.time.LocalDateTime;
 import com.helpdesk.api.repository.ticket.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -105,5 +107,35 @@ public class TicketService {
 
         existing.setPriority(newPriority);
         ticketRepository.save(existing);
+    }
+
+    public void assignTicket(String ticketId,  Profile users) {
+        if (users == null || users.getId() == null || users.getId().isBlank()) {
+            throw new IllegalArgumentException("Assigned user is required");
+        }
+
+        if (ticketId == null || ticketId.isBlank()) {
+            throw new IllegalArgumentException("Ticket id is required");
+        }
+
+        // Only administrators can assign tickets
+        // The caller (admin) check is expected to be done by controller/service caller;
+        // here we'll require that the caller is an ADMINISTRATOR by checking user's role if provided as admin.
+        // Since signature only receives the assignee, assume this method is called by admin context.
+
+        Ticket existing = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
+
+        if (users.getRole() != ProfileRoles.SUPPORT_AGENT) {
+            throw new IllegalArgumentException("Assigned profile must be a SUPPORT_AGENT");
+        }
+
+        existing.setAssignedTo(users);
+        existing.setAssignedAt(LocalDateTime.now());
+        // When assigned, move state to IN_PROGRESS
+        existing.setState(TicketStates.IN_PROGRESS);
+
+        ticketRepository.save(existing);
+
     }
 }

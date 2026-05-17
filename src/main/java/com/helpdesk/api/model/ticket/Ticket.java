@@ -39,6 +39,12 @@ public class Ticket {
     @DBRef
     private Profile createdBy;
 
+    // Assigned support agent id, and assignment timestamp
+    @DBRef
+    private Profile assignedTo;
+
+    private LocalDateTime assignedAt;
+
     // Constructors
     public Ticket() {
     }
