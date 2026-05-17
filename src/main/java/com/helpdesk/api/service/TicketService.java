@@ -28,7 +28,7 @@ public class TicketService {
         return ticketRepository.save(ticket);
     }
 
-    // update ticket (partial update). Only the creator can modify it.
+    // partial update. Only the creator can modify it.
     public Ticket updateTicket(Profile user, String ticketId, String title, String description,
                                TicketCategories category, TicketPriorities priority) {
         if (user == null || user.getId() == null || user.getId().isBlank()) {
@@ -38,8 +38,7 @@ public class TicketService {
             throw new IllegalArgumentException("Ticket id is required");
         }
 
-        Ticket existingTicket = ticketRepository.findById(ticketId)
-                .orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
+        Ticket existingTicket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
 
         if (existingTicket.getCreatedBy() == null || existingTicket.getCreatedBy().getId() == null || !existingTicket.getCreatedBy().getId().equals(user.getId())) {
             throw new IllegalArgumentException("Only the creator can update this ticket");
@@ -59,5 +58,23 @@ public class TicketService {
         }
 
         return ticketRepository.save(existingTicket);
+    }
+
+    public void deleteTicket(Profile user, String ticketId) {
+        if (user == null || user.getId() == null || user.getId().isBlank()) {
+            throw new IllegalArgumentException("User is required");
+        }
+        if (ticketId == null || ticketId.isBlank()) {
+            throw new IllegalArgumentException("Ticket id is required");
+        }
+
+        Ticket existingTicket = ticketRepository.findById(ticketId)
+                .orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
+
+        if (existingTicket.getCreatedBy() == null || existingTicket.getCreatedBy().getId() == null || !existingTicket.getCreatedBy().getId().equals(user.getId())) {
+            throw new IllegalArgumentException("Only the creator can delete this ticket");
+        }
+
+        ticketRepository.deleteById(ticketId);
     }
 }
