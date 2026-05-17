@@ -173,4 +173,15 @@ public class TicketService {
         existing.setState(TicketStates.CLOSED);
         ticketRepository.save(existing);
     }
+
+    public List<Ticket> getAssignedTickets(Profile agent) {
+        if (agent == null || agent.getId() == null || agent.getId().isBlank()) {
+            throw new IllegalArgumentException("Agent is required");
+        }
+        if (agent.getRole() != ProfileRoles.SUPPORT_AGENT) {
+            throw new IllegalArgumentException("Only support agents can view assigned tickets");
+        }
+
+        return ticketRepository.findByAssignedTo(agent);
+    }
 }

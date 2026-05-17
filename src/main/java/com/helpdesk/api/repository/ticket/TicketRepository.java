@@ -98,4 +98,11 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
      * @return Lista de tickets creados por ese perfil
      */
     List<Ticket> findByCreatedBy(Profile createdBy);
+
+    /**
+     * Buscar tickets asignados a un perfil específico
+     * @param assignedTo : Perfil asignado
+     * @return Lista de tickets asignados a ese perfil
+     */
+    List<Ticket> findByAssignedTo(Profile assignedTo);
 }
