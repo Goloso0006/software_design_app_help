@@ -1,6 +1,7 @@
 package com.helpdesk.api.repository.ticket;
 
 import com.helpdesk.api.model.ticket.Ticket;
+import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.model.enums.ticket.TicketCategories;
 import com.helpdesk.api.model.enums.ticket.TicketPriorities;
 import com.helpdesk.api.model.enums.ticket.TicketStates;
@@ -90,4 +91,11 @@ public interface TicketRepository extends MongoRepository<Ticket, String> {
      * @return true si existe, false en caso contrario
      */
     boolean existsByTitle(String title);
+
+    /**
+     * Buscar tickets creados por un perfil específico
+     * @param createdBy : Perfil creador
+     * @return Lista de tickets creados por ese perfil
+     */
+    List<Ticket> findByCreatedBy(Profile createdBy);
 }

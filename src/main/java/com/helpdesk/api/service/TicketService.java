@@ -8,6 +8,8 @@ import com.helpdesk.api.model.ticket.Ticket;
 import com.helpdesk.api.repository.ticket.TicketRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TicketService {
 
@@ -76,5 +78,12 @@ public class TicketService {
         }
 
         ticketRepository.deleteById(ticketId);
+    }
+
+    public List<Ticket> getMyTickets(Profile user) {
+        if (user == null || user.getId() == null || user.getId().isBlank()) {
+            throw new IllegalArgumentException("User is required");
+        }
+        return ticketRepository.findByCreatedBy(user); // Devuelve lista vacía si no hay tickets
     }
 }
