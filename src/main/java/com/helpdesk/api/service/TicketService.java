@@ -86,4 +86,24 @@ public class TicketService {
         }
         return ticketRepository.findByCreatedBy(user); // Devuelve lista vacía si no hay tickets
     }
+
+    public void changeTicketPriority(String ticketId, TicketPriorities newPriority, Profile admin) {
+
+        if (admin == null || admin.getRole() != ProfileRoles.ADMINISTRATOR) {
+            throw new IllegalArgumentException("Only administrators can change ticket priority");
+        }
+
+        if (ticketId == null || ticketId.isBlank()) {
+            throw new IllegalArgumentException("Ticket id is required");
+        }
+
+        if (newPriority == null) {
+            throw new IllegalArgumentException("New priority must be provided");
+        }
+
+        Ticket existing = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
+
+        existing.setPriority(newPriority);
+        ticketRepository.save(existing);
+    }
 }
