@@ -144,4 +144,3 @@ public interface TicketHistoryRepository extends MongoRepository<TicketHistory, 
      */
     List<TicketHistory> findByTicketIdOrderByDateDesc(String ticketId);
 }
-

@@ -1,6 +1,7 @@
 package com.helpdesk.api.model.ticket;
 
 import java.time.LocalDateTime;
+import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.model.enums.ticket.TicketCategories;
 import com.helpdesk.api.model.enums.ticket.TicketPriorities;
 import com.helpdesk.api.model.enums.ticket.TicketStates;
@@ -10,6 +11,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 
 @Document(collection = "tickets")
@@ -32,6 +34,10 @@ public class Ticket {
     private TicketCategories category;
     private TicketPriorities priority;
     private TicketStates state;
+
+    // method Reference to the creator Profile id
+    @DBRef
+    private Profile createdBy;
 
     // Constructors
     public Ticket() {
