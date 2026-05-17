@@ -35,7 +35,7 @@ public class TicketService {
     // partial update. Only the creator can modify it.
     public Ticket updateTicket(Profile user, String ticketId, String title, String description, TicketCategories category, TicketPriorities priority) {
         validateUserExists(user);
-        validateTicketId(ticketId);
+        validateId(ticketId);
 
         Ticket existingTicket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
 
@@ -59,7 +59,7 @@ public class TicketService {
 
     public void deleteTicket(Profile user, String ticketId) {
         validateUserExists(user);
-        validateTicketId(ticketId);
+        validateId(ticketId);
 
         Ticket existingTicket = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
         validateTicketCreator(existingTicket, user, "delete");
@@ -75,7 +75,7 @@ public class TicketService {
     public void changeTicketPriority(String ticketId, TicketPriorities newPriority, Profile admin) {
         validateUserExists(admin);
         validateUserRole(admin, ProfileRoles.ADMINISTRATOR);
-        validateTicketId(ticketId);
+        validateId(ticketId);
         validateTicketPriority(newPriority);
 
         Ticket existing = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
@@ -87,7 +87,7 @@ public class TicketService {
     public void assignTicket(String ticketId,  Profile support) {
         validateUserExists(support);
         validateUserRole(support, ProfileRoles.SUPPORT_AGENT);
-        validateTicketId(ticketId);
+        validateId(ticketId);
 
         // Only administrators can assign tickets
         // The caller (admin) check is expected to be done by controller/service caller;
@@ -108,7 +108,7 @@ public class TicketService {
      * and for now only the CLOSED state is allowed.
      */
     public void updateTicketStatus(String ticketId, TicketStates newState, Profile agent) {
-        validateTicketId(ticketId);
+        validateId(ticketId);
         validateUserExists(agent);
         validateUserRole(agent, ProfileRoles.SUPPORT_AGENT);
         validateTicketState(newState);

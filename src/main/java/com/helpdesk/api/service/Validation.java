@@ -23,8 +23,8 @@ public class Validation {
         }
     }
 
-    // Valida ticket ID no sea null ni vacío
-    public static void validateTicketId(String ticketId) {
+    // Valida ID no sea null ni vacío
+    public static void validateId(String ticketId) {
         if (ticketId == null || ticketId.isBlank()) {
             throw new IllegalArgumentException("Ticket id is required");
         }
