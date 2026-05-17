@@ -8,6 +8,13 @@ import com.helpdesk.api.model.ticket.Ticket;
 
 public class Validation {
 
+    // Generic id validation used by services that work with Mongo ids
+    public static void validateId(String id) {
+        if (id == null || id.isBlank()) {
+            throw new IllegalArgumentException("Id is required");
+        }
+    }
+
     // Validar usuario exista y tenga ID
     public static void validateUserExists(Profile user) {
         if (user == null || user.getId() == null || user.getId().isBlank()) {
@@ -20,13 +27,6 @@ public class Validation {
         validateUserExists(user); // opcional, por seguridad
         if (user.getRole() != expectedRole) {
             throw new IllegalArgumentException("User must have role " + expectedRole + ", but has " + user.getRole());
-        }
-    }
-
-    // Valida ID no sea null ni vacío
-    public static void validateId(String ticketId) {
-        if (ticketId == null || ticketId.isBlank()) {
-            throw new IllegalArgumentException("Ticket id is required");
         }
     }
 
