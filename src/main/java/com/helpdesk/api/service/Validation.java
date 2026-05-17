@@ -8,7 +8,7 @@ import com.helpdesk.api.model.ticket.Ticket;
 
 public class Validation {
 
-    // Generic id validation used by services that work with Mongo ids
+    // Validar entrada de Id
     public static void validateId(String id) {
         if (id == null || id.isBlank()) {
             throw new IllegalArgumentException("Id is required");
@@ -54,11 +54,9 @@ public class Validation {
         }
     }
 
-    // Valida usuario sea el creador del ticket para realizar una acción específica
+    // Validar usuario sea el creador del ticket para realizar acción específica
     public static void validateTicketCreator(Ticket ticket, Profile user, String typeAccion) {
-        if (ticket.getCreatedBy() == null
-                || ticket.getCreatedBy().getId() == null
-                || !ticket.getCreatedBy().getId().equals(user.getId())) {
+        if (ticket.getCreatedBy() == null || ticket.getCreatedBy().getId() == null || !ticket.getCreatedBy().getId().equals(user.getId())) {
             throw new IllegalArgumentException("Only the creator can " + typeAccion + " this ticket");
         }
     }
