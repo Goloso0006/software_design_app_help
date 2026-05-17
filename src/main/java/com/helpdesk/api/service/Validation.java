@@ -6,7 +6,7 @@ import com.helpdesk.api.model.enums.ticket.TicketPriorities;
 import com.helpdesk.api.model.enums.ticket.TicketStates;
 import com.helpdesk.api.model.ticket.Ticket;
 
-public class validation {
+public class Validation {
 
     // Validar usuario exista y tenga ID
     public static void validateUserExists(Profile user) {

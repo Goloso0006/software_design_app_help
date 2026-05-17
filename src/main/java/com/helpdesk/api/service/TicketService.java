@@ -7,7 +7,7 @@ import com.helpdesk.api.model.enums.ticket.TicketStates;
 import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.model.ticket.Ticket;
 import com.helpdesk.api.repository.ticket.TicketRepository;
-import static com.helpdesk.api.service.validation.*;
+import static com.helpdesk.api.service.Validation.*;
 
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Service;
