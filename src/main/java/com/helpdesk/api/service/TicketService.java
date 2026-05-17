@@ -138,4 +138,39 @@ public class TicketService {
         ticketRepository.save(existing);
 
     }
+
+    /**
+     * Update the status of a ticket. Only the assigned support agent can change it,
+     * and for now only the CLOSED state is allowed.
+     */
+    public void updateTicketStatus(String ticketId, TicketStates newState, Profile agent) {
+        if (ticketId == null || ticketId.isBlank()) {
+            throw new IllegalArgumentException("Ticket id is required");
+        }
+        if (agent == null || agent.getId() == null || agent.getId().isBlank()) {
+            throw new IllegalArgumentException("Agent is required");
+        }
+        if (agent.getRole() != ProfileRoles.SUPPORT_AGENT) {
+            throw new IllegalArgumentException("Only support agents can update ticket status");
+        }
+        if (newState == null) {
+            throw new IllegalArgumentException("New state must be provided");
+        }
+        if (newState != TicketStates.CLOSED) {
+            throw new IllegalArgumentException("For now, only CLOSED state is allowed");
+        }
+
+        Ticket existing = ticketRepository.findById(ticketId).orElseThrow(() -> new IllegalArgumentException("Ticket not found with id: " + ticketId));
+
+        if (existing.getAssignedTo() == null || existing.getAssignedTo().getId() == null || !existing.getAssignedTo().getId().equals(agent.getId())) {
+            throw new IllegalArgumentException("Only the assigned agent can update this ticket status");
+        }
+
+        if (existing.getState() == TicketStates.CLOSED) {
+            throw new IllegalArgumentException("Ticket is already closed");
+        }
+
+        existing.setState(TicketStates.CLOSED);
+        ticketRepository.save(existing);
+    }
 }
