@@ -27,7 +27,7 @@ import java.util.List;
  * - countByAuthor(Profile) : Contar por autor
  */
 @Repository
-public interface PublicCommentRepository extends CommentRepository {
+public interface PublicCommentRepository extends CommentRepository<PublicComment> {
 
     /**
      * Buscar comentarios públicos por estado

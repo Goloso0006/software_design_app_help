@@ -1,6 +1,7 @@
 package com.helpdesk.api.repository.ticket;
 
 import com.helpdesk.api.model.ticket.TicketHistory;
+import com.helpdesk.api.model.ticket.Ticket;
 import com.helpdesk.api.model.enums.ticket.TicketHistoryAction;
 import com.helpdesk.api.model.entry.Profile;
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -33,10 +34,10 @@ public interface TicketHistoryRepository extends MongoRepository<TicketHistory, 
 
     /**
      * Buscar todo el historial de un ticket específico
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @return Lista de acciones realizadas en ese ticket (ordenadas por fecha)
      */
-    List<TicketHistory> findByTicketId(String ticketId);
+    List<TicketHistory> findByTicket(Ticket ticket);
 
     /**
      * Buscar acciones de un tipo específico
@@ -58,15 +59,15 @@ public interface TicketHistoryRepository extends MongoRepository<TicketHistory, 
      * @param endDate : Fecha final
      * @return Lista de acciones realizadas entre esas fechas
      */
-    List<TicketHistory> findByDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+    List<TicketHistory> findByCreateDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     /**
      * Buscar acciones de un tipo Y en un ticket específico (búsqueda combinada)
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @param action : Tipo de acción
      * @return Lista de acciones que cumplen ambas condiciones
      */
-    List<TicketHistory> findByTicketIdAndAction(String ticketId, TicketHistoryAction action);
+    List<TicketHistory> findByTicketAndAction(Ticket ticket, TicketHistoryAction action);
 
     /**
      * Buscar acciones de un tipo Y realizadas por un usuario (búsqueda combinada)
@@ -78,27 +79,27 @@ public interface TicketHistoryRepository extends MongoRepository<TicketHistory, 
 
     /**
      * Buscar acciones de un ticket Y realizadas por un usuario (búsqueda combinada)
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @param performedBy : Perfil del usuario
      * @return Lista de acciones que cumplen ambas condiciones
      */
-    List<TicketHistory> findByTicketIdAndPerformedBy(String ticketId, Profile performedBy);
+    List<TicketHistory> findByTicketAndPerformedBy(Ticket ticket, Profile performedBy);
 
     /**
      * Buscar acciones de un ticket, tipo Y usuario específico (búsqueda triple)
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @param action : Tipo de acción
      * @param performedBy : Perfil del usuario
      * @return Lista de acciones que cumplen las tres condiciones
      */
-    List<TicketHistory> findByTicketIdAndActionAndPerformedBy(String ticketId, TicketHistoryAction action, Profile performedBy);
+    List<TicketHistory> findByTicketAndActionAndPerformedBy(Ticket ticket, TicketHistoryAction action, Profile performedBy);
 
     /**
      * Contar acciones en un ticket específico
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @return Cantidad total de acciones en ese ticket
      */
-    long countByTicketId(String ticketId);
+    long countByTicket(Ticket ticket);
 
     /**
      * Contar acciones de un tipo específico
@@ -116,31 +117,31 @@ public interface TicketHistoryRepository extends MongoRepository<TicketHistory, 
 
     /**
      * Contar acciones de un tipo en un ticket específico
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @param action : Tipo de acción
      * @return Cantidad de acciones que cumplen ambas condiciones
      */
-    long countByTicketIdAndAction(String ticketId, TicketHistoryAction action);
+    long countByTicketAndAction(Ticket ticket, TicketHistoryAction action);
 
     /**
      * Contar acciones realizadas por un usuario en un ticket específico
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @param performedBy : Perfil del usuario
      * @return Cantidad de acciones que cumplen ambas condiciones
      */
-    long countByTicketIdAndPerformedBy(String ticketId, Profile performedBy);
+    long countByTicketAndPerformedBy(Ticket ticket, Profile performedBy);
 
     /**
      * Verificar si existe historial para un ticket
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @return true si existen registros, false si no hay historial
      */
-    boolean existsByTicketId(String ticketId);
+    boolean existsByTicket(Ticket ticket);
 
     /**
      * Obtener la acción más reciente de un ticket
-     * @param ticketId : ID del ticket
+     * @param ticket : Ticket reference
      * @return Lista con la última acción (para obtener el primero)
      */
-    List<TicketHistory> findByTicketIdOrderByDateDesc(String ticketId);
+    List<TicketHistory> findByTicketOrderByCreateDateDesc(Ticket ticket);
 }

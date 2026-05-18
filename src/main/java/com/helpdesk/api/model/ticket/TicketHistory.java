@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.ToString;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 
 @Document(collection = "ticketHistories")
 @Getter
@@ -18,6 +19,8 @@ public class TicketHistory {
     private String id;
 
     // methods of object
+    @DBRef
+    private Ticket ticket;
     private LocalDateTime createDate;
     private TicketHistoryAction action;
     private String description;
@@ -27,7 +30,8 @@ public class TicketHistory {
     protected TicketHistory() {
     }
 
-    public TicketHistory(TicketHistoryAction action, LocalDateTime createDate, String description, Profile performedBy) {
+    public TicketHistory(Ticket ticket, TicketHistoryAction action, LocalDateTime createDate, String description, Profile performedBy) {
+        this.ticket = ticket;
         this.action = action;
         this.createDate = createDate;
         this.description = description;

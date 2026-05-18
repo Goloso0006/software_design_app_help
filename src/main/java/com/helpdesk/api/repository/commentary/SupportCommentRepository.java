@@ -29,7 +29,7 @@ import java.util.List;
  * - countByAuthor(Profile) : Contar por autor
  */
 @Repository
-public interface SupportCommentRepository extends CommentRepository {
+public interface SupportCommentRepository extends CommentRepository<SupportComment> {
 
     /**
      * Buscar comentarios de soporte por visibilidad al usuario

@@ -26,21 +26,21 @@ import java.util.List;
  * - count() : Contar total de comentarios
  */
 @Repository
-public interface CommentRepository extends MongoRepository<Comment, String> {
+public interface CommentRepository<T extends Comment> extends MongoRepository<T, String> {
 
     /**
      * Buscar todos los comentarios de un autor específico
      * @param author : Perfil del autor
      * @return Lista de comentarios creados por ese autor
      */
-    List<Comment> findByAuthor(Profile author);
+    List<T> findByAuthor(Profile author);
 
     /**
      * Buscar comentarios creados en una fecha específica
      * @param createDate : Fecha de creación
      * @return Lista de comentarios creados en esa fecha
      */
-    List<Comment> findByCreateDate(LocalDateTime createDate);
+    List<T> findByCreateDate(LocalDateTime createDate);
 
     /**
      * Buscar comentarios creados en un rango de fechas
@@ -48,7 +48,7 @@ public interface CommentRepository extends MongoRepository<Comment, String> {
      * @param endDate : Fecha final
      * @return Lista de comentarios creados entre esas fechas
      */
-    List<Comment> findByCreateDateBetween(LocalDateTime startDate, LocalDateTime endDate);
+    List<T> findByCreateDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 
     /**
      * Contar comentarios de un autor específico
