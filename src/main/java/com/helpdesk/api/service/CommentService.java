@@ -33,7 +33,7 @@ public class CommentService {
     }
 
     // Add a public comment to a ticket
-    public void addComment(Ticket ticket, String text, Profile author) {
+    public PublicComment addComment(Ticket ticket, String text, Profile author) {
         Validation.validateUserExists(author);
         if (ticket == null || ticket.getId() == null || ticket.getId().isBlank()) {
             throw new IllegalArgumentException("Ticket is required and must have an id");
@@ -48,15 +48,13 @@ public class CommentService {
         Validation.validateTicketNotClosed(existing);
 
         PublicComment comment = new PublicComment(existing, author, text);
-        publicCommentRepository.save(comment);
-
-        // record history
         TicketHistory history = new TicketHistory(existing, TicketHistoryAction.PUBLIC_COMMENT_ADDED, LocalDateTime.now(), "Public comment added", author);
         ticketHistoryRepository.save(history);
+        return publicCommentRepository.save(comment);
     }
 
     // Add a support/internal comment to a ticket
-    public void addSupportComment(Ticket ticket, String text, boolean isVisibleToUser, Profile author) {
+    public SupportComment addSupportComment(Ticket ticket, String text, boolean isVisibleToUser, Profile author) {
         Validation.validateUserExists(author);
         if (ticket == null || ticket.getId() == null || ticket.getId().isBlank()) {
             throw new IllegalArgumentException("Ticket is required and must have an id");
@@ -76,10 +74,8 @@ public class CommentService {
         }
 
         SupportComment comment = new SupportComment(existing, author, text, isVisibleToUser);
-        supportCommentRepository.save(comment);
-
-        // record history
         TicketHistory history = new TicketHistory(existing, TicketHistoryAction.SUPPORT_COMMENT_ADDED, LocalDateTime.now(), "Support comment added", author);
         ticketHistoryRepository.save(history);
+        return supportCommentRepository.save(comment);
     }
 }
