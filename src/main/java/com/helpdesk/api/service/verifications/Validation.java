@@ -1,4 +1,4 @@
-package com.helpdesk.api.service;
+package com.helpdesk.api.service.verifications;
 
 import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.model.enums.entry.ProfileRoles;

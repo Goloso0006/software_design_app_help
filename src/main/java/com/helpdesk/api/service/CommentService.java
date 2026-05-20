@@ -12,6 +12,7 @@ import com.helpdesk.api.repository.ticket.TicketRepository;
 import com.helpdesk.api.model.ticket.TicketHistory;
 import com.helpdesk.api.model.enums.entry.ProfileRoles;
 
+import com.helpdesk.api.service.verifications.Validation;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -46,7 +47,7 @@ public class CommentService {
 
         Validation.validateTicketNotClosed(existing);
 
-        PublicComment comment = new PublicComment(author, text);
+        PublicComment comment = new PublicComment(existing, author, text);
         publicCommentRepository.save(comment);
 
         // record history
@@ -74,7 +75,7 @@ public class CommentService {
             Validation.validateUserRole(author, ProfileRoles.SUPPORT_AGENT);
         }
 
-        SupportComment comment = new SupportComment(author, text, isVisibleToUser);
+        SupportComment comment = new SupportComment(existing, author, text, isVisibleToUser);
         supportCommentRepository.save(comment);
 
         // record history
@@ -82,4 +83,3 @@ public class CommentService {
         ticketHistoryRepository.save(history);
     }
 }
-

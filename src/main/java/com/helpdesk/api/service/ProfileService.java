@@ -5,8 +5,8 @@ import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.repository.entry.ProfileRepository;
 import com.helpdesk.api.repository.entry.LoginRepository;
 
-import static com.helpdesk.api.service.Validation.validateId;
-import static com.helpdesk.api.service.Validation.validateUserExists;
+import static com.helpdesk.api.service.verifications.Validation.validateId;
+import static com.helpdesk.api.service.verifications.Validation.validateUserExists;
 import org.springframework.stereotype.Service;
 
 
