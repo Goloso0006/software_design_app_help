@@ -2,6 +2,7 @@ package com.helpdesk.api.repository.commentary;
 
 import com.helpdesk.api.model.commentary.Comment;
 import com.helpdesk.api.model.entry.Profile;
+import com.helpdesk.api.model.ticket.Ticket;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
@@ -27,6 +28,13 @@ import java.util.List;
  */
 @Repository
 public interface CommentRepository<T extends Comment> extends MongoRepository<T, String> {
+
+    /**
+     * Buscar todos los comentarios de un ticket específico
+     * @param ticket : Ticket relacionado
+     * @return Lista de comentarios del ticket
+     */
+    List<T> findByTicket(Ticket ticket);
 
     /**
      * Buscar todos los comentarios de un autor específico
@@ -64,4 +72,3 @@ public interface CommentRepository<T extends Comment> extends MongoRepository<T,
      */
     boolean existsByDescription(String description);
 }
-

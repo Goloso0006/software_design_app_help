@@ -3,6 +3,7 @@ package com.helpdesk.api.model.commentary;
 
 import com.helpdesk.api.model.entry.Profile;
 import com.helpdesk.api.model.enums.commentary.CommentStatus;
+import com.helpdesk.api.model.ticket.Ticket;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -24,7 +25,11 @@ public class PublicComment extends Comment {
     }
 
     public PublicComment(Profile author, String description) {
-        super(author, description);
+        this(null, author, description);
+    }
+
+    public PublicComment(Ticket ticket, Profile author, String description) {
+        super(ticket, author, description);
         this.likes = 0;
         this.isReported = false;
         this.status = CommentStatus.ACTIVE;

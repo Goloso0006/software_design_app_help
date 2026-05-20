@@ -1,6 +1,7 @@
 package com.helpdesk.api.model.commentary;
 
 import com.helpdesk.api.model.entry.Profile;
+import com.helpdesk.api.model.ticket.Ticket;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,15 +19,12 @@ public class SupportComment extends Comment {
     // Constructors
     protected SupportComment() {
     }
-
-    public SupportComment(Profile author, String description) {
-        super(author, description);
-        this.isVisibleToUser = true;
-    }
-
-    public SupportComment(Profile author, String description, boolean isVisibleToUser) {
-        super(author, description);
+    /**
+     * Primary constructor. Keep a single explicit constructor to avoid many overloads.
+     * Use this when creating a SupportComment providing all necessary fields.
+     */
+    public SupportComment(Ticket ticket, Profile author, String description, boolean isVisibleToUser) {
+        super(ticket, author, description);
         this.isVisibleToUser = isVisibleToUser;
     }
 }
-
