@@ -18,7 +18,6 @@ public class PublicComment extends Comment {
     // methods of object
     private int likes = 0;
     private boolean isReported;
-    private CommentStatus status;
 
     // Constructors
     protected PublicComment() {
@@ -32,7 +31,6 @@ public class PublicComment extends Comment {
         super(ticket, author, description);
         this.likes = 0;
         this.isReported = false;
-        this.status = CommentStatus.ACTIVE;
     }
 }
 
